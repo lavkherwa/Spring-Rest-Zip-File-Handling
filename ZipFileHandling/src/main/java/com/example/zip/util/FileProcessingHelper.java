@@ -28,13 +28,13 @@ public class FileProcessingHelper {
 			} else if ("zip".equalsIgnoreCase(getFileExtension(file))) {
 				saveFilesFromZip(file);
 			} else {
-				saveSingleFile(file);
+				saveFile(file);
 			}
 
 		}
 	}
 
-	private void saveSingleFile(MultipartFile file) throws IOException {
+	private void saveFile(MultipartFile file) throws IOException {
 		/* Create a new local file in our local resource folder */
 		String absoluteFilePath = "src/main/resources/files/" + file.getOriginalFilename();
 		File localFile = new File(absoluteFilePath);
@@ -89,7 +89,7 @@ public class FileProcessingHelper {
 
 	}
 
-	public void addFilesToZip(ZipOutputStream zipOut, String file) throws IOException {
+	public void addGivenFileToZip(ZipOutputStream zipOut, String file) throws IOException {
 
 		/* Get file input stream */
 		try (final InputStream inputStream = getClass().getResourceAsStream("/files/" + file)) {
@@ -107,7 +107,7 @@ public class FileProcessingHelper {
 		}
 	}
 
-	public List<String> readAllFilesFromPath(String path) {
+	public List<String> listAllFilesFromGivenPath(String path) {
 
 		List<String> files = new ArrayList<>();
 

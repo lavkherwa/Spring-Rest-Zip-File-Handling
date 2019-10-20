@@ -50,14 +50,14 @@ public class Resources {
 		response.setContentType("application/zip");
 		response.setHeader("Content-Disposition", "attachment;filename=sample.zip");
 
-		List<String> files = fileProcessingHelper.readAllFilesFromPath("src/main/resources/files/");
+		List<String> files = fileProcessingHelper.listAllFilesFromGivenPath("src/main/resources/files/");
 
 		StreamingResponseBody stream = out -> {
 			/* Create a ZIP output stream from response output stream */
 			try (final ZipOutputStream zipOut = new ZipOutputStream(response.getOutputStream())) {
 				/* Gather all files and put it in a ZIP */
 				for (String file : files) {
-					fileProcessingHelper.addFilesToZip(zipOut, file);
+					fileProcessingHelper.addGivenFileToZip(zipOut, file);
 				}
 			}
 
